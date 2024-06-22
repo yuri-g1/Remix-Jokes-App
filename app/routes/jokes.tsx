@@ -1,16 +1,8 @@
-import type {
-  LinksFunction,
-  LoaderFunctionArgs,
-} from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import {
-  Form,
-  Link,
-  Outlet,
-  useLoaderData,
-} from "@remix-run/react";
+import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
 
-import stylesUrl from "~/styles/jokes.css";
+import stylesUrl from "~/styles/jokes.css?url";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 
@@ -18,9 +10,7 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesUrl },
 ];
 
-export const loader = async ({
-  request,
-}: LoaderFunctionArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const jokeListItems = await db.joke.findMany({
     orderBy: { createdAt: "desc" },
     select: { id: true, name: true },
@@ -39,11 +29,7 @@ export default function JokesRoute() {
       <header className="jokes-header">
         <div className="container">
           <h1 className="home-link">
-            <Link
-              to="/"
-              title="Remix Jokes"
-              aria-label="Remix Jokes"
-            >
+            <Link to="/" title="Remix Jokes" aria-label="Remix Jokes">
               <span className="logo">🤪</span>
               <span className="logo-medium">J🤪KES</span>
             </Link>
