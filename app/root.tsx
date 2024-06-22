@@ -1,7 +1,4 @@
-import type {
-  LinksFunction,
-  MetaFunction,
-} from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   Links,
@@ -13,9 +10,9 @@ import {
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
 
-import globalLargeStylesUrl from "~/styles/global-large.css";
-import globalMediumStylesUrl from "~/styles/global-medium.css";
-import globalStylesUrl from "~/styles/global.css";
+import globalLargeStylesUrl from "~/styles/global-large.css?url";
+import globalMediumStylesUrl from "~/styles/global-medium.css?url";
+import globalStylesUrl from "~/styles/global.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: globalStylesUrl },
@@ -32,8 +29,7 @@ export const links: LinksFunction = () => [
 ];
 
 export const meta: MetaFunction = () => {
-  const description =
-    "Learn Remix and laugh at the same time!";
+  const description = "Learn Remix and laugh at the same time!";
 
   return [
     { name: "description", content: description },
@@ -42,27 +38,18 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-function Document({
-  children,
-  title,
-}: PropsWithChildren<{ title?: string }>) {
+function Document({ children, title }: PropsWithChildren<{ title?: string }>) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="keywords" content="Remix,jokes" />
         <meta
           name="twitter:image"
           content="https://remix-jokes.lol/social.png"
         />
-        <meta
-          name="twitter:card"
-          content="summary_large_image"
-        />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@remix_run" />
         <meta name="twitter:site" content="@remix_run" />
         <meta name="twitter:title" content="Remix Jokes" />
@@ -73,7 +60,6 @@ function Document({
       <body>
         {children}
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );
@@ -93,9 +79,7 @@ export function ErrorBoundary() {
 
   if (isRouteErrorResponse(error)) {
     return (
-      <Document
-        title={`${error.status} ${error.statusText}`}
-      >
+      <Document title={`${error.status} ${error.statusText}`}>
         <div className="error-container">
           <h1>
             {error.status} {error.statusText}
@@ -105,16 +89,5 @@ export function ErrorBoundary() {
     );
   }
 
-  const errorMessage =
-    error instanceof Error
-      ? error.message
-      : "Unknown error";
-  return (
-    <Document title="Uh-oh!">
-      <div className="error-container">
-        <h1>App Error</h1>
-        <pre>{errorMessage}</pre>
-      </div>
-    </Document>
-  );
+ 
 }
