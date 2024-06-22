@@ -89,6 +89,7 @@ export default function App() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
+  console.error(error);
 
   if (isRouteErrorResponse(error)) {
     return (
@@ -104,5 +105,16 @@ export function ErrorBoundary() {
     );
   }
 
- 
+  const errorMessage =
+    error instanceof Error
+      ? error.message
+      : "Unknown error";
+  return (
+    <Document title="Uh-oh!">
+      <div className="error-container">
+        <h1>App Error</h1>
+        <pre>{errorMessage}</pre>
+      </div>
+    </Document>
+  );
 }
