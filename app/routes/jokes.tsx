@@ -2,6 +2,8 @@ import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
 
+import { PrismaClient } from "@prisma/client";
+
 import stylesUrl from "~/styles/jokes.css?url";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
